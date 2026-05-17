@@ -1,6 +1,23 @@
 ---
 name: research-executor
-description: ONLY invoke when the user explicitly types `/research-executor` (or asks to "run research-executor" / "use the research-executor skill" by name). Do NOT auto-activate based on goal text, METHODOLOGY sections, plan files, or task specs appearing in the conversation — even when the content looks like a perfect fit. The user controls when this skill runs because the full 10-phase orchestration consumes Opus 4.7 plus extensive WebSearch budget across multiple subagents. If the user pastes a research spec without naming the skill, ask whether they want to invoke `/research-executor` rather than launching it. Runtime behavior once invoked — always on (non-negotiable): maximal test coverage, plot generation, phase timing instrumentation, reproducibility manifest (pip freeze + git rev + sha256 hashes), project-relative paths only. Configurable: torch+numpy+python determinism stack (default ON), read-only fences (default ON), strict-phrasing audit on the Summarizer output only (default ON, workload code/tests/logs exempt; disable with "direct summary" or "no phrasing constraints" in goal text). Pipeline: Field Advisor (Opus) + 2 parallel authors (Sonnet) + Runner (Sonnet) + Verifier (Sonnet) + Summarizer (Opus) + two advisor() checkpoints.
+description: >-
+  ONLY invoke when the user explicitly types `/research-executor` (or asks to
+  "run research-executor" / "use the research-executor skill" by name). Do NOT
+  auto-activate based on goal text, METHODOLOGY sections, plan files, or task
+  specs appearing in the conversation — even when the content looks like a
+  perfect fit. The user controls when this skill runs because the full 10-phase
+  orchestration consumes Opus 4.7 plus extensive WebSearch budget across multiple
+  subagents. If the user pastes a research spec without naming the skill, ask
+  whether they want to invoke `/research-executor` rather than launching it.
+  Runtime behavior once invoked — always on (non-negotiable): maximal test
+  coverage, plot generation, phase timing instrumentation, reproducibility
+  manifest (pip freeze + git rev + sha256 hashes), project-relative paths only.
+  Configurable: torch+numpy+python determinism stack (default ON), read-only
+  fences (default ON), strict-phrasing audit on the Summarizer output only
+  (default ON, workload code/tests/logs exempt; disable with "direct summary"
+  or "no phrasing constraints" in goal text). Pipeline: Field Advisor (Opus) +
+  2 parallel authors (Sonnet) + Runner (Sonnet) + Verifier (Sonnet) +
+  Summarizer (Opus) + two advisor() checkpoints.
 ---
 
 # research-executor
