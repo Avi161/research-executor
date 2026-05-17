@@ -6,12 +6,12 @@ inputs:
   - ./tmp/api_contract.md (the contract to implement)
   - ./tmp/field_advisor_pre_distilled.md (pitfalls + checks)
   - ./tmp/codebase_digest.md (conventions only)
-  - {goal_text}, {read_only_paths_from_goal}, {hard_rules_from_goal}, {advisor_traps}, {output_dirs_from_goal} (injected)
+  - "{goal_text}, {read_only_paths_from_goal}, {hard_rules_from_goal}, {advisor_traps}, {output_dirs_from_goal} (injected)"
 outputs:
   - workload .py file(s) at paths from API contract
   - ./tmp/author_code_contract_concerns.md (only if author thinks contract is wrong)
 placeholders:
-  - {goal_text}, {read_only_paths_from_goal}, {hard_rules_from_goal}, {advisor_traps}, {output_dirs_from_goal}
+  - "{goal_text}, {read_only_paths_from_goal}, {hard_rules_from_goal}, {advisor_traps}, {output_dirs_from_goal}"
 spawn_in_parallel_with: author_tests
 ---
 

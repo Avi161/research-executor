@@ -3,15 +3,15 @@ name: runner
 role: P5 — Runner subagent (executes workload + tests, up to 3 fix-and-retry iterations)
 model_override_key: runner
 inputs:
-  - {workload_file}, {test_file} (paths from P4)
-  - {working_dir} (cwd for the subagent)
-  - {output_dirs_from_goal}, {read_only_paths_from_goal}, {cli_args_from_goal} (injected)
+  - "{workload_file}, {test_file} (paths from P4)"
+  - "{working_dir} (cwd for the subagent)"
+  - "{output_dirs_from_goal}, {read_only_paths_from_goal}, {cli_args_from_goal} (injected)"
 outputs:
   - all artifact files (CSVs, JSONs, plots) under {output_dirs_from_goal}
   - reproducibility manifest files (env.txt, git_rev.txt, git_status.txt, inputs.sha256, outputs.sha256)
   - tmp/run_log_step1.txt, tmp/run_log_step3.txt, {output_dirs}/run_log.txt
 placeholders:
-  - {workload_file}, {test_file}, {working_dir}, {output_dirs_from_goal}, {read_only_paths_from_goal}, {cli_args_from_goal}
+  - "{workload_file}, {test_file}, {working_dir}, {output_dirs_from_goal}, {read_only_paths_from_goal}, {cli_args_from_goal}"
 companion_script: scripts/reproducibility_manifest.sh
 ---
 

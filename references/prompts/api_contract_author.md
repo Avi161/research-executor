@@ -5,11 +5,11 @@ model_override_key: p4_prep_contract
 inputs:
   - ./tmp/codebase_digest.md
   - ./tmp/field_advisor_pre_distilled.md
-  - {goal_text}, {read_only_paths_from_goal}, {output_dirs_from_goal}, {deliverables_from_goal} (injected)
+  - "{goal_text}, {read_only_paths_from_goal}, {output_dirs_from_goal}, {deliverables_from_goal} (injected)"
 outputs:
   - ./tmp/api_contract.md (one row per signature/output/flag; length scales with deliverable count)
 placeholders:
-  - {goal_text}, {read_only_paths_from_goal}, {output_dirs_from_goal}, {deliverables_from_goal}
+  - "{goal_text}, {read_only_paths_from_goal}, {output_dirs_from_goal}, {deliverables_from_goal}"
 ---
 
 # Prompt
@@ -60,7 +60,9 @@ For each `python <script>.py …` invocation, list flags with their type and def
 `--results-dir PATH (required)`, `--seed INT (default 42)`, etc.
 
 ## Invariants Tests Must Assert
-3–8 cross-file or cross-function invariants the test file must check (e.g. "every CSV has exactly len(features) rows", "gap_X = ceiling - probe_X within 1e-9"). Phrased as testable predicates.
+3–8 cross-file or cross-function invariants the test file must check (e.g. "every CSV has exactly len(features) rows"
+, "gap_X = ceiling - probe_X within 1e-9"
+). Phrased as testable predicates.
 
 # Constraints
 - **Format rule: one signature / one output / one CLI flag per line, no prose explanations.** Each row is dense and machine-readable. Total length is whatever the deliverable list demands — do NOT pad and do NOT compress to fit an arbitrary budget. A goal with 4 modules × 3 functions + 6 CSVs + 4 plots will produce ~80 lines; that's correct.

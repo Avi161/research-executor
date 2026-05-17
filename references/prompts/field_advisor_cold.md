@@ -4,13 +4,13 @@ role: P2 — Field Advisor (cold mode, no cache hit)
 model_override_key: field_advisor
 inputs:
   - ./tmp/codebase_digest.md
-  - {goal_text} (verbatim, injected)
+  - "{goal_text} (verbatim, injected)"
 outputs:
   - ./.research_executor/field_knowledge_{field_slug}.md (persistent cache, REQUIRED)
   - ./.research_executor/field_advisor_index.json (merge, REQUIRED)
   - ./tmp/field_advisor_pre.md (goal-specific review, REQUIRED)
 placeholders:
-  - {field_detected}, {field_slug}, {field_exemplars}, {goal_text}
+  - "{field_detected}, {field_slug}, {field_exemplars}, {goal_text}"
 ---
 
 # Cold-mode prompt
@@ -27,22 +27,34 @@ The user is about to execute the following research task. Read it, the codebase 
    a. **Field exemplars.** Name 5–10 researchers / groups whose work defines the field. One sentence each on what they're known for.
    b. **Top 8–15 most relevant papers for this field.** Full citations. One sentence each on why it matters. Include both classical foundations and recent (last 2 years) work. Follow citation trails via WebFetch.
    c. **Field-standard pitfalls.** Specific failure modes the field has identified. Cite the paper that documented each. Examples for mechanistic interpretability: probe leakage, basis-rotation skeptic checks, Wilson-interval boundary FP drift, selectivity controls (Hewitt-Liang 2019), polysemantic neurons.
-   d. **Field-expected verification checks.** Concrete sanity checks a domain expert always wants to see in this field's artifacts. Examples: "report Wilson 95% CI for every accuracy claim," "include a shuffled-label control for every probe class," "verify PCA is fit on train only."
+   d. **Field-expected verification checks.** Concrete sanity checks a domain expert always wants to see in this field's artifacts. Examples: "report Wilson 95% CI for every accuracy claim,"
+ "include a shuffled-label control for every probe class,"
+ "verify PCA is fit on train only."
    e. **Exemplar artifacts to emulate.** 2–3 papers whose method/exposition is a model to copy in this field. For each, what specifically should be borrowed.
 
 2. `./tmp/field_advisor_pre.md` — the **goal-specific review** of THIS task's approach. Sections:
-   a. **Approach review.** Prefer "this fails because X" over approval. For each component of the plan, ask: would a top reviewer accept this? Is the comparison fair? Are controls sufficient? Is the metric well-defined? What's missing? Reference the cache file's pitfall list — say which pitfalls THIS approach is exposed to.
+   a. **Approach review.** Prefer "this fails because X"
+ over approval. For each component of the plan, ask: would a top reviewer accept this? Is the comparison fair? Are controls sufficient? Is the metric well-defined? What's missing? Reference the cache file's pitfall list — say which pitfalls THIS approach is exposed to.
    b. **Top 3 must-address items.** The single most important concerns specific to this goal.
    c. **Goal-specific sanity checks.** Beyond the field-standard checks in the cache, what does THIS task need?
 
 After writing both files, also create/update `./.research_executor/field_advisor_index.json`:
 {
-  "{field_slug}": {
-    "created_utc": "<ISO timestamp>",
-    "field_detected": "{field_detected}",
-    "exemplars": "{field_exemplars}",
-    "paper_count": <int — count of papers in section b>,
-    "file_size_bytes": <int>
+  "{field_slug}"
+: {
+    "created_utc"
+: "<ISO timestamp>"
+,
+    "field_detected"
+: "{field_detected}"
+,
+    "exemplars"
+: "{field_exemplars}"
+,
+    "paper_count"
+: <int — count of papers in section b>,
+    "file_size_bytes"
+: <int>
   }
 }
 If the file already exists with other field slugs, merge — do not overwrite other entries.
@@ -56,18 +68,21 @@ If the file already exists with other field slugs, merge — do not overwrite ot
 # Constraints
 - DO NOT modify any project files outside `./.research_executor/` and `./tmp/`.
 - DO NOT propose the puzzle answer or the task conclusion. Provide method/quality feedback only.
-- BE SPECIFIC. Vague approvals ("looks good") are worse than nothing. If you can't find a specific concern, say "no concerns found after checking X, Y, Z."
+- BE SPECIFIC. Vague approvals ("looks good"
+) are worse than nothing. If you can't find a specific concern, say "no concerns found after checking X, Y, Z."
 - Keep the cache file goal-agnostic. Anything referencing THIS specific goal belongs in `./tmp/field_advisor_pre.md`, not the cache.
 
 # Mandatory deliverables — self-verify BEFORE returning
 
-The persistent cache (`./.research_executor/field_knowledge_{field_slug}.md` + `./.research_executor/field_advisor_index.json`) is **co-equal** with the goal-specific review. It is not optional, not "nice to have," and not deferrable to a later phase. No other phase writes it. If you skip it, the project loses cache reuse permanently for this field.
+The persistent cache (`./.research_executor/field_knowledge_{field_slug}.md` + `./.research_executor/field_advisor_index.json`) is **co-equal** with the goal-specific review. It is not optional, not "nice to have,"
+ and not deferrable to a later phase. No other phase writes it. If you skip it, the project loses cache reuse permanently for this field.
 
 Before sending your final message, run via Bash and confirm each file exists and is non-empty:
     wc -c ./.research_executor/field_knowledge_{field_slug}.md
     wc -c ./.research_executor/field_advisor_index.json
     wc -c ./tmp/field_advisor_pre.md
-If any of the three prints `0 ./...` or errors with "No such file," you have **not** completed the task. Write the missing file and re-run the check. Repeat until all three report non-zero byte counts. Do not return until all three pass.
+If any of the three prints `0 ./...` or errors with "No such file,"
+ you have **not** completed the task. Write the missing file and re-run the check. Repeat until all three report non-zero byte counts. Do not return until all three pass.
 
 Return only when all three files exist and are non-empty. Final message MUST include: the three paths, byte counts for each, paper count in the cache file, top-3 must-address items.
 ```

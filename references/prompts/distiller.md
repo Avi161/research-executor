@@ -8,7 +8,7 @@ inputs:
 outputs:
   - ./tmp/field_advisor_pre_distilled.md (≤ 6 KB)
 placeholders:
-  - {field_slug}
+  - "{field_slug}"
 ---
 
 # Prompt
@@ -24,13 +24,19 @@ Read ./.research_executor/field_knowledge_{field_slug}.md if present.
 Write ./tmp/field_advisor_pre_distilled.md with EXACTLY these sections, in this order:
 
 ## Pitfalls (every one — bulleted, one line each)
-Pull from the full file's "field-standard pitfalls" section AND any pitfalls flagged inline in the approach review. Format: "- [pitfall name] — [one-sentence description] (source: [paper or §ref])".
+Pull from the full file's "field-standard pitfalls"
+ section AND any pitfalls flagged inline in the approach review. Format: "- [pitfall name] — [one-sentence description] (source: [paper or §ref])"
+.
 
 ## Verification checks (every one — bulleted, one line each)
-Pull from the "field-expected verification checks" section AND any check requested in the approach review. Each must be assertable in a test: phrase it as an invariant ("X must equal Y", "every row must have Z").
+Pull from the "field-expected verification checks"
+ section AND any check requested in the approach review. Each must be assertable in a test: phrase it as an invariant ("X must equal Y"
+, "every row must have Z"
+).
 
 ## Top-3 must-address (verbatim quotes from the full file)
-Three numbered items, each one paragraph max, copied verbatim from the "Top 3 must-address items" section of the full file.
+Three numbered items, each one paragraph max, copied verbatim from the "Top 3 must-address items"
+ section of the full file.
 
 # Constraints
 - Target total length ≤ 6 KB. If you exceed, you're including too much narrative — strip it.

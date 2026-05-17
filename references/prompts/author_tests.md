@@ -6,11 +6,11 @@ inputs:
   - ./tmp/api_contract.md (the contract to assert against)
   - ./tmp/field_advisor_pre_distilled.md (one regression test per pitfall, one assertion test per check)
   - ./tmp/codebase_digest.md (naming conventions only)
-  - {goal_text}, {read_only_paths_from_goal}, {hard_rules_from_goal}, {advisor_traps}, {test_filename} (injected)
+  - "{goal_text}, {read_only_paths_from_goal}, {hard_rules_from_goal}, {advisor_traps}, {test_filename} (injected)"
 outputs:
   - tests/{test_filename}.py
 placeholders:
-  - {goal_text}, {read_only_paths_from_goal}, {hard_rules_from_goal}, {advisor_traps}, {test_filename}
+  - "{goal_text}, {read_only_paths_from_goal}, {hard_rules_from_goal}, {advisor_traps}, {test_filename}"
 spawn_in_parallel_with: author_code
 ---
 

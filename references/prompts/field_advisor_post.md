@@ -4,13 +4,13 @@ role: P8a — Field Advisor post (reviews produced artifacts against pre-flight 
 model_override_key: field_advisor
 inputs:
   - ./tmp/field_advisor_pre.md (the prior review — every concern must be verified addressed)
-  - {workload_file}, {test_file}, tests/{verifier_test_filename}
+  - "{workload_file}, {test_file}, tests/{verifier_test_filename}"
   - all produced result CSVs/JSONs and plot PNGs
-  - {run_log_path}
+  - "{run_log_path}"
 outputs:
   - ./tmp/field_advisor_post.md
 placeholders:
-  - {field_detected}, {goal_text}, {workload_file}, {test_file}, {verifier_test_filename}, {author_test_count}, {verifier_test_count}, {run_log_path}
+  - "{field_detected}, {goal_text}, {workload_file}, {test_file}, {verifier_test_filename}, {author_test_count}, {verifier_test_count}, {run_log_path}"
 spawn_in_parallel_with: advisor()  (the second arm of P8 — see SKILL.md Phase 8)
 ---
 

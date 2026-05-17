@@ -5,11 +5,11 @@ model_override_key: field_advisor
 inputs:
   - ./.research_executor/field_knowledge_{field_slug}.md (cached, read-only)
   - ./tmp/codebase_digest.md
-  - {goal_text} (verbatim, injected)
+  - "{goal_text} (verbatim, injected)"
 outputs:
   - ./tmp/field_advisor_pre.md (goal-specific review, REQUIRED — only deliverable in warm mode)
 placeholders:
-  - {field_detected}, {field_slug}, {goal_text}, {created_utc}
+  - "{field_detected}, {field_slug}, {goal_text}, {created_utc}"
 ---
 
 # Warm-mode prompt
@@ -33,8 +33,10 @@ You may still use WebSearch / WebFetch for spot-checks if something in the goal 
 # Your single deliverable: `./tmp/field_advisor_pre.md`
 
 Sections:
-a. **Cache reference.** One line: "Reading field knowledge from `./.research_executor/field_knowledge_{field_slug}.md` (cached {created_utc})." If you spot anything in the cache that looks stale (a paper retracted, a recent finding that contradicts a cached pitfall, etc.), note it here and propose what to update.
-b. **Approach review.** Apply the cached pitfalls + verification checks to the goal. Say which pitfalls THIS approach is exposed to and which checks the plan honors / skips. Prefer "this fails because X" over approval.
+a. **Cache reference.** One line: "Reading field knowledge from `./.research_executor/field_knowledge_{field_slug}.md` (cached {created_utc})."
+ If you spot anything in the cache that looks stale (a paper retracted, a recent finding that contradicts a cached pitfall, etc.), note it here and propose what to update.
+b. **Approach review.** Apply the cached pitfalls + verification checks to the goal. Say which pitfalls THIS approach is exposed to and which checks the plan honors / skips. Prefer "this fails because X"
+ over approval.
 c. **Top 3 must-address items** specific to this goal.
 d. **Goal-specific sanity checks.** What does THIS task need beyond the cache's standard checks?
 

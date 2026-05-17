@@ -3,16 +3,18 @@ name: contract_reconstructor
 role: P4d — Contract reconstructor (semantic anti-Goodharting round-trip)
 model_override_key: p4d_reconstructor
 inputs:
-  - {test_file_path} (and ONLY this file — must not read workload or real contract)
+  - "{test_file_path} (and ONLY this file — must not read workload or real contract)"
 outputs:
   - ./tmp/api_contract_reconstructed.md
 placeholders:
-  - {test_file_path}
+  - "{test_file_path}"
 ---
 
 # Why this exists
 
-Step 4c catches **syntactic** drift (test file imports a name the workload doesn't expose). It does NOT catch **semantic** drift — e.g. the contract said "CSV columns in order: a, b, c" but Author-Tests read that as "columns {a, b, c} in any order" while Author-Code wrote them in the spec'd order. Tests pass against the looser interpretation. Both agents are internally consistent; they agree only by accident.
+Step 4c catches **syntactic** drift (test file imports a name the workload doesn't expose). It does NOT catch **semantic** drift — e.g. the contract said "CSV columns in order: a, b, c"
+ but Author-Tests read that as "columns {a, b, c} in any order"
+ while Author-Code wrote them in the spec'd order. Tests pass against the looser interpretation. Both agents are internally consistent; they agree only by accident.
 
 The round-trip catches this: this Opus call reads ONLY the test file and reconstructs what it thinks the contract is. The orchestrator then diffs that reconstruction against the real `./tmp/api_contract.md`.
 
@@ -48,13 +50,16 @@ For each plot path the tests check, on one line:
 For each `python <script>` invocation in the tests, list the flags passed.
 
 ## Invariants the tests appear to enforce
-3–8 bullets. Phrase as "tests assert that …" — e.g. "tests assert that intrinsic_dim.csv has exactly len(features) rows".
+3–8 bullets. Phrase as "tests assert that …"
+ — e.g. "tests assert that intrinsic_dim.csv has exactly len(features) rows"
+.
 
 # Constraints
 - Do NOT read any file other than {test_file_path}.
 - Do NOT speculate beyond what the test file asserts. If a behavior isn't tested, do NOT include it.
 - Use the SAME format the real contract uses (one row per signature/output/flag, no prose).
-- Flag any test that uses `set()` comparisons on columns that should be ordered — list these in a final "## Ordering ambiguities" section.
+- Flag any test that uses `set()` comparisons on columns that should be ordered — list these in a final "## Ordering ambiguities"
+ section.
 
 Return when written. Final message: byte count, count of reconstructed functions, count of reconstructed CSVs, count of ordering-ambiguity flags.
 ```

@@ -3,7 +3,7 @@ name: verifier
 role: P7 — Verifier subagent (independent assertions, spec-only context)
 model_override_key: verifier
 inputs:
-  - {goal_text} (verbatim ground truth)
+  - "{goal_text} (verbatim ground truth)"
   - ./tmp/field_advisor_pre.md
   - final {workload_file} source (Read at spawn time)
   - produced artifacts (Read/verify them)
@@ -11,7 +11,7 @@ outputs:
   - tests/{verifier_test_filename}
   - tmp/run_log_verifier.txt
 placeholders:
-  - {goal_text}, {workload_file}, {verifier_test_filename}, {read_only_paths_from_goal}, {hard_rules_from_goal}, {deliverables_from_goal}, {spec_definitions}
+  - "{goal_text}, {workload_file}, {verifier_test_filename}, {read_only_paths_from_goal}, {hard_rules_from_goal}, {deliverables_from_goal}, {spec_definitions}"
 ---
 
 # Why the Verifier sees a restricted context

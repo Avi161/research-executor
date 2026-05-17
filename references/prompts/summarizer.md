@@ -6,15 +6,15 @@ inputs:
   - ./tmp/codebase_digest.md
   - ./tmp/field_advisor_pre.md
   - ./tmp/field_advisor_post.md
-  - {workload_file}
+  - "{workload_file}"
   - all produced artifacts (CSVs, JSONs)
   - all produced plot PNGs (existence + sizes only)
-  - {run_log_path}
+  - "{run_log_path}"
   - any prior-phase summary docs pointed to by the codebase digest
 outputs:
-  - {summary_md_path} (the user-facing summary markdown; ONLY deliverable)
+  - "{summary_md_path} (the user-facing summary markdown; ONLY deliverable)"
 placeholders:
-  - {summary_md_path}, {working_dir}, {workload_file}, {run_log_path}, {phase_8_directives}
+  - "{summary_md_path}, {working_dir}, {workload_file}, {run_log_path}, {phase_8_directives}"
 strict_phrasing:
   default: ON  (applies ONLY to this Summarizer output and P10 final user message)
   opt_out_phrases:
